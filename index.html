@@ -2,60 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Happy New Year 🎆</title>
+  <title>Just For You 💖</title>
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
       color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       text-align: center;
-      padding: 40px;
+      overflow: hidden;
     }
+
     .box {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       padding: 30px;
-      border-radius: 15px;
-      max-width: 500px;
-      margin: auto;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
     }
+
     button {
       margin-top: 20px;
-      padding: 12px 20px;
-      font-size: 16px;
+      padding: 12px 25px;
       border: none;
       border-radius: 25px;
+      font-size: 16px;
       cursor: pointer;
       background: #ffcc70;
     }
+
     button:hover {
       background: #ffd98e;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    #noBtn {
+      position: relative;
     }
   </style>
 </head>
 
 <body>
 
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
 <div class="box">
-  <h2 id="text">Hey you 🎉<br>I made something for you</h2>
-  <button onclick="nextMessage()">Open 🎁</button>
+  <h2 id="text">Hey you 👀</h2>
+
+  <button onclick="next()">Tap to continue 💫</button>
+
+  <div id="choice" style="display:none;">
+    <h3>Do you like this surprise? 😌</h3>
+    <button onclick="yes()">Yes 💖</button>
+    <button id="noBtn" onmouseover="moveNo()">No 😒</button>
+  </div>
+
+  <!-- Image reveal -->
+  <img id="pic" src="https://i.imgur.com/8Km9tLL.jpg">
 </div>
 
 <script>
   let step = 0;
+
   const messages = [
-    "Before the year ends…<br>I just want you to know 💭",
-    "I’m really grateful for you.<br>Thank you for being such a great friend 🥹",
-    "Happy New Year 🎆<br>May 2025 be full of laughter, health, and good memories ✨"
+    "I made this just for you ✨",
+    "Because you’re actually pretty special 😌",
+    "And I wanted to make you smile 💕",
+    "Okay… one last thing 😳"
   ];
 
-  function nextMessage() {
+  function next() {
+    document.getElementById("bgMusic").play();
+
     if (step < messages.length) {
       document.getElementById("text").innerHTML = messages[step];
       step++;
+    } else {
+      document.querySelector("button").style.display = "none";
+      document.getElementById("choice").style.display = "block";
     }
+  }
+
+  function yes() {
+    document.getElementById("choice").style.display = "none";
+    document.getElementById("text").innerHTML = "Hehe 😏 I knew it 💖";
+    document.getElementById("pic").style.display = "block";
+  }
+
+  function moveNo() {
+    const btn = document.getElementById("noBtn");
+    btn.style.position = "absolute";
+    btn.style.left = Math.random() * 70 + "%";
+    btn.style.top = Math.random() * 70 + "%";
   }
 </script>
 
 </body>
-
 </html>
